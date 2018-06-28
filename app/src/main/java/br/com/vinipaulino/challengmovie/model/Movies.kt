@@ -1,19 +1,27 @@
 package br.com.vinipaulino.challengmovie.model
 
+import android.os.Parcel
+import android.os.Parcelable
+import io.realm.RealmList
+import io.realm.RealmObject
 import java.io.Serializable
 
 
-data class Movies(var poster_path: String,
-                  var adult: Boolean,
-                  var overview: String,
-                  var release_date: String,
-                  var genre_ids: List<Int>,
-                  var id: Int,
-                  var original_title: String,
-                  var original_language: String,
-                  var title: String,
-                  var backdrop_path: String,
-                  var popularity: Double,
-                  var vote_count: Int,
-                  var video: Boolean,
-                  var vote_average: Double) : Serializable
+open class Movies(var poster_path: String? = null,
+                  var adult: Boolean? = false,
+                  var overview: String? = null,
+                  var release_date: String? = null,
+                  var genre_ids: RealmList<Int>? = null,
+                  var id: Int? = null,
+                  var original_title: String? = null,
+                  var original_language: String? = null,
+                  var title: String? = null,
+                  var backdrop_path: String? = null,
+                  var popularity: Double? = null,
+                  var vote_count: Int? = null,
+                  var video: Boolean = false,
+                  var vote_average: Double? = null) : RealmObject(), Serializable {
+
+}
+
+

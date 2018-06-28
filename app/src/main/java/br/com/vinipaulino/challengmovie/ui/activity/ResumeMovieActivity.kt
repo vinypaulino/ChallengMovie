@@ -8,6 +8,7 @@ import br.com.vinipaulino.challengmovie.model.Movies
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_resume_movie.*
 import kotlinx.android.synthetic.main.layout_item_movies.*
+import java.text.SimpleDateFormat
 
 class ResumeMovieActivity : AppCompatActivity() {
 
@@ -17,15 +18,28 @@ class ResumeMovieActivity : AppCompatActivity() {
 
         //Capturar o filme aqui
         val intent = intent
-        val movie: Movies = intent.getSerializableExtra("movie") as Movies
+        val movie_id: String = intent.getStringExtra("movie_id")
 
-        txt_title_movie.text = movie.original_title
+        //Recuperar meu objeto
+        TODO("Capturar o objeto atravez do Id se ")
+
 
         Picasso.with(this)
                 .load(AppConstants.IMG_BASE_URL + movie.backdrop_path)
-                .resize(1100, 500)
+                .resize(1100, 700)
                 .centerCrop()
                 .into(img_resume_movie)
+        txt_title_movie.text = movie.title
+        txt_sipnose.text = movie.overview
+
+
+        val dataEmUmFormato = movie.release_date
+        val formato = SimpleDateFormat("yyyy-MM-dd")
+        val data = formato.parse(dataEmUmFormato)
+        formato.applyPattern("dd/MM/yyyy")
+        val dataFormatada = formato.format(data)
+        txt_datalancamento.text =  dataFormatada
+        txt_genero.text = movie.id.toString()
         // Fazer o bind dos campos e setar na tela
 
     }

@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_item_movies.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import java.text.SimpleDateFormat
 
 class MovieAdapter(var context: Context, var list: List<Movies>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,8 +25,7 @@ class MovieAdapter(var context: Context, var list: List<Movies>) : RecyclerView.
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.tvName.text = list[position].original_title
-        holder.tvDate.text = "Release Date : " + list[position].release_date
+        holder.tvName.text = list[position].title
 
         Picasso.with(context)
                 .load(AppConstants.IMG_BASE_URL + list[position].backdrop_path)
@@ -35,9 +35,17 @@ class MovieAdapter(var context: Context, var list: List<Movies>) : RecyclerView.
 
         holder.imgMovie.setOnClickListener {
             val intent = Intent(context, ResumeMovieActivity::class.java)
-            intent.putExtra("movie", list[position])
+            intent.putExtra("movie_id", list[position].id)
             context.startActivity(intent)
         }
+
+        val dataEmUmFormato = list[position].release_date
+        val formato = SimpleDateFormat("yyyy-MM-dd")
+        val data = formato.parse(dataEmUmFormato)
+        formato.applyPattern("dd/MM/yyyy")
+        val dataFormatada = formato.format(data)
+        holder.tvDate.text =  dataFormatada
+
     }
 
     override fun getItemCount(): Int {

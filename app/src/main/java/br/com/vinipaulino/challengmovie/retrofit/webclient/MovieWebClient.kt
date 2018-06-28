@@ -16,7 +16,7 @@ import retrofit2.Response
 class MovieWebClient {
     fun getMoviesPremier(callbackResponse: CallbackResponse<List<Movies>> ) {
 
-        val call = RetrofitInicializer().movieService().getMoviesPremier(AppConstants.API_KEY)
+        val call = RetrofitInicializer().movieService().getMoviesPremier(AppConstants.API_KEY, AppConstants.LANGUAGUE)
 
         call.enqueue(object : Callback<MovieResponse> {
 
@@ -30,7 +30,7 @@ class MovieWebClient {
             }
 
             override fun onFailure(call: Call<MovieResponse>?, t: Throwable?) {
-//                progressBar.visibility = View.GONE
+                //progressBar.visibility = View.GONE
                 Log.e("OnFailure", t.toString())
             }
         })
