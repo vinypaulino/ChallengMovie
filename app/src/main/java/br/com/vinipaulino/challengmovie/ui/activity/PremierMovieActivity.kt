@@ -92,7 +92,7 @@ class PremierMovieActivity : BaseActivity() {
     }
 
     var timer : Timer? = null
-    var searchMenuItem: MenuItem? = null
+    private var searchMenuItem: MenuItem? = null
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)
 
@@ -132,8 +132,6 @@ class PremierMovieActivity : BaseActivity() {
         return true
     }
 
-
-
     fun onSearchTextChanged(contentToSearch: String){
         listMovies?.clear()
         if (contentToSearch.trim().isNotEmpty()){
@@ -154,8 +152,6 @@ class PremierMovieActivity : BaseActivity() {
         }
 
     }
-
-
 
     private fun hideKeyboard() {
         runOnUiThread {

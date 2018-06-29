@@ -37,34 +37,37 @@ class ResumeMovieActivity : AppCompatActivity() {
         val intent = intent
         this.movieId = intent.getStringExtra("movie_id")
 
-
-        if (!AndroidUtils.isNetworkAvailable(this)) {
+        val internetOk = AndroidUtils.isNetworkAvailable(this)
+        if (internetOk) {
+            if (movieId != null) {
+                getMovieDetails()
+            }
+        } else {
             loadMovieBd()
             carregaImagem()
             progressBarResume.visibility = View.GONE
-
-        } else {
-            if (movieId != null) {
-                MovieWebClient().getMovieDetails(movieId!!, object : CallbackResponse<MovieDetails> {
-                    override fun success(response: MovieDetails) {
-                        loadMovieDetails(response)
-                        carregaImagem()
-                        progressBarResume.visibility = View.GONE
-                    }
-
-                    override fun failure(throwable: Throwable) {
-                        toast("Não foi possivel realizar a comunicação com o servidor")
-                        progressBarResume.visibility = View.GONE
-                    }
-
-                    override fun responseFailure() {
-                        toast("Filme não encontrado")
-                        progressBarResume.visibility = View.GONE
-                    }
-                })
-            }
         }
 
+    }
+
+    private fun getMovieDetails() {
+        MovieWebClient().getMovieDetails(movieId!!, object : CallbackResponse<MovieDetails> {
+            override fun success(response: MovieDetails) {
+                loadMovieDetails(response)
+                carregaImagem()
+                progressBarResume.visibility = View.GONE
+            }
+
+            override fun failure(throwable: Throwable) {
+                toast("Não foi possivel realizar a comunicação com o servidor")
+                progressBarResume.visibility = View.GONE
+            }
+
+            override fun responseFailure() {
+                toast("Filme não encontrado")
+                progressBarResume.visibility = View.GONE
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -73,7 +76,7 @@ class ResumeMovieActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item?.itemId
-        if (id == R.id.home){
+        if (id == R.id.home) {
             onBackPressed()
             return true
         }
@@ -122,9 +125,6 @@ class ResumeMovieActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
         finish()
     }
-
-
 }
