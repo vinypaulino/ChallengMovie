@@ -35,7 +35,7 @@ class MovieAdapter(var context: Context, var list: List<Movies>) : RecyclerView.
 
         holder.imgMovie.setOnClickListener {
             val intent = Intent(context, ResumeMovieActivity::class.java)
-            intent.putExtra("movie_id", list[position].id)
+            intent.putExtra("movie_id", list[position].id.toString())
             context.startActivity(intent)
         }
 
