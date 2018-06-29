@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DCDCDC"
-    tools:context="br.com.vinipaulino.challengmovie.ui.activity.PremierMovieActivity">
+    tools:context="br.com.vinipaulino.challengmovie.ui.activity.PremierMovieActivity"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar"/>
 
     <FrameLayout
         android:layout_width="match_parent"

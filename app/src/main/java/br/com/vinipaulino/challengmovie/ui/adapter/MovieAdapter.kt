@@ -12,6 +12,7 @@ import br.com.vinipaulino.challengmovie.R
 import br.com.vinipaulino.challengmovie.model.Movies
 import br.com.vinipaulino.challengmovie.ui.activity.ResumeMovieActivity
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.inflate_list.view.*
 import kotlinx.android.synthetic.main.layout_item_movies.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -33,7 +34,7 @@ class MovieAdapter(var context: Context, var list: List<Movies>) : RecyclerView.
                 .centerCrop()
                 .into(holder.imgMovie)
 
-        holder.imgMovie.setOnClickListener {
+        holder.cardView.setOnClickListener {
             val intent = Intent(context, ResumeMovieActivity::class.java)
             intent.putExtra("movie_id", list[position].id.toString())
             context.startActivity(intent)
@@ -56,5 +57,6 @@ class MovieAdapter(var context: Context, var list: List<Movies>) : RecyclerView.
         val tvName = itemView.txt_title_movies
         val tvDate = itemView.txt_date_realease_movie
         val imgMovie = itemView.img_cover_movie
+        val cardView = itemView.cardViewMovie
     }
 }
